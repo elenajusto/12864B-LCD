@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "LCD12864B.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
