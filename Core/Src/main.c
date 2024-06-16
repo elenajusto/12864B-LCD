@@ -23,6 +23,7 @@
 /* USER CODE BEGIN Includes */
 #include "LCD12864B.h"
 #include "delay.h"
+#include "bitmap.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -100,10 +101,16 @@ int main(void)
 
   ST7920_Init();
 
-  ST7920_SendString(0,0, "HOLY SHIT");
-  ST7920_SendString(1,0, "IM ALIVE!");
-  ST7920_SendString(2,0, "MEOW MEOW MEOW");
-  ST7920_SendString(3,0, "MOOOOOOOOOOOOO");
+  ST7920_SendString(0,2, "");
+  ST7920_SendString(1,0, "Design Challenge");
+  ST7920_SendString(2,0, "Vehicle Online");
+  ST7920_SendString(3,2, "");
+
+  HAL_Delay(2000);
+  ST7920_Clear();
+
+  ST7920_GraphicMode(1);
+  ST7920_DrawBitmap(BigLogo);
 
   /* USER CODE END 2 */
 

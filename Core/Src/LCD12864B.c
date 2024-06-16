@@ -17,59 +17,46 @@
 #define RST_PIN GPIO_PIN_1
 #define RST_PORT GPIOB
 
-uint8_t startRow, startCol, endRow, endCol; // coordinates of the dirty rectangle
+uint8_t startRow, startCol, endRow, endCol; 			// coordinates of the dirty rectangle
 uint8_t numRows = 64;
 uint8_t numCols = 128;
 uint8_t Graphic_Check = 0;
 
-
-// A replacement for SPI_TRANSMIT
-
+/* A replacement for SPI_TRANSMIT */
 void SendByteSPI(uint8_t byte)
 {
-	for(int i=0;i<8;i++)
-	{
-		if((byte<<i)&0x80)
-			{
-				HAL_GPIO_WritePin(SID_PORT, SID_PIN, GPIO_PIN_SET);  // SID=1  OR MOSI
+	for (int i=0;i<8;i++){
+		if ( (byte<<i)&0x80 ){
+				HAL_GPIO_WritePin(SID_PORT, SID_PIN, GPIO_PIN_SET);		// SID=1  OR MOSI
+			} else {
+				HAL_GPIO_WritePin(SID_PORT, SID_PIN, GPIO_PIN_RESET);	// SID=0
 			}
-
-		else HAL_GPIO_WritePin(SID_PORT, SID_PIN, GPIO_PIN_RESET);  // SID=0
-
-		HAL_GPIO_WritePin(SCLK_PORT, SCLK_PIN, GPIO_PIN_RESET);  // SCLK =0  OR SCK
-
-		HAL_GPIO_WritePin(SCLK_PORT, SCLK_PIN, GPIO_PIN_SET);  // SCLK=1
-
+		HAL_GPIO_WritePin(SCLK_PORT, SCLK_PIN, GPIO_PIN_RESET);			// SCLK =0  OR SCK
+		HAL_GPIO_WritePin(SCLK_PORT, SCLK_PIN, GPIO_PIN_SET);			// SCLK=1
 	}
 }
 
-
-
-
 void ST7920_SendCmd (uint8_t cmd)
 {
+	HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);  	  // PUll the CS high
 
-	HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);  // PUll the CS high
-
-	SendByteSPI(0xf8+(0<<1));  // send the SYNC + RS(0)
-	SendByteSPI(cmd&0xf0);  // send the higher nibble first
-	SendByteSPI((cmd<<4)&0xf0);  // send the lower nibble
+	SendByteSPI(0xf8+(0<<1));  						   	  // send the SYNC + RS(0)
+	SendByteSPI(cmd&0xf0);  						   	  // send the higher nibble first
+	SendByteSPI((cmd<<4)&0xf0);  					      // send the lower nibble
 	delay_us(50);
 
-	HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);  // PUll the CS LOW
-
+	HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);   // PUll the CS LOW
 }
 
 void ST7920_SendData (uint8_t data)
 {
+	HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);  	// PUll the CS high
 
-	HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_SET);  // PUll the CS high
-
-	SendByteSPI(0xf8+(1<<1));  // send the SYNC + RS(1)
-	SendByteSPI(data&0xf0);  // send the higher nibble first
-	SendByteSPI((data<<4)&0xf0);  // send the lower nibble
+	SendByteSPI(0xf8+(1<<1));  							// send the SYNC + RS(1)
+	SendByteSPI(data&0xf0);  							// send the higher nibble first
+	SendByteSPI((data<<4)&0xf0);  						// send the lower nibble
 	delay_us(50);
-	HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET);  // PUll the CS LOW
+	HAL_GPIO_WritePin(CS_PORT, CS_PIN, GPIO_PIN_RESET); // PUll the CS LOW
 }
 
 void ST7920_SendString(int row, int col, char* string)
@@ -101,28 +88,25 @@ void ST7920_SendString(int row, int col, char* string)
     	}
 }
 
-
-
-// switch to graphic mode or normal mode::: enable = 1 -> graphic mode enable = 0 -> normal mode
-
+/* Switch to graphic mode or normal mode::: enable = 1 -> graphic mode enable = 0 -> normal mode */
 void ST7920_GraphicMode (int enable)   // 1-enable, 0-disable
 {
 	if (enable == 1)
 	{
-		ST7920_SendCmd(0x30);  // 8 bit mode
+		ST7920_SendCmd(0x30);  	// 8 bit mode
 		HAL_Delay (1);
-		ST7920_SendCmd(0x34);  // switch to Extended instructions
+		ST7920_SendCmd(0x34);  	// switch to Extended instructions
 		HAL_Delay (1);
-		ST7920_SendCmd(0x36);  // enable graphics
+		ST7920_SendCmd(0x36);  	// enable graphics
 		HAL_Delay (1);
-		Graphic_Check = 1;  // update the variable
+		Graphic_Check = 1;  	// update the variable
 	}
 
 	else if (enable == 0)
 	{
-		ST7920_SendCmd(0x30);  // 8 bit mode
+		ST7920_SendCmd(0x30);  	// 8 bit mode
 		HAL_Delay (1);
-		Graphic_Check = 0;  // update the variable
+		Graphic_Check = 0;  	// update the variable
 	}
 }
 
@@ -135,17 +119,17 @@ void ST7920_DrawBitmap(const unsigned char* graphic)
 		{
 			for(x = 0; x < 8; x++)							// Draws top half of the screen.
 			{												// In extended instruction mode, vertical and horizontal coordinates must be specified before sending data in.
-				ST7920_SendCmd(0x80 | y);				// Vertical coordinate of the screen is specified first. (0-31)
-				ST7920_SendCmd(0x80 | x);				// Then horizontal coordinate of the screen is specified. (0-8)
+				ST7920_SendCmd(0x80 | y);					// Vertical coordinate of the screen is specified first. (0-31)
+				ST7920_SendCmd(0x80 | x);					// Then horizontal coordinate of the screen is specified. (0-8)
 				ST7920_SendData(graphic[2*x + 16*y]);		// Data to the upper byte is sent to the coordinate.
-				ST7920_SendData(graphic[2*x+1 + 16*y]);	// Data to the lower byte is sent to the coordinate.
+				ST7920_SendData(graphic[2*x+1 + 16*y]);		// Data to the lower byte is sent to the coordinate.
 			}
 		}
 		else
 		{
 			for(x = 0; x < 8; x++)							// Draws bottom half of the screen.
 			{												// Actions performed as same as the upper half screen.
-				ST7920_SendCmd(0x80 | (y-32));			// Vertical coordinate must be scaled back to 0-31 as it is dealing with another half of the screen.
+				ST7920_SendCmd(0x80 | (y-32));				// Vertical coordinate must be scaled back to 0-31 as it is dealing with another half of the screen.
 				ST7920_SendCmd(0x88 | x);
 				ST7920_SendData(graphic[2*x + 16*y]);
 				ST7920_SendData(graphic[2*x+1 + 16*y]);
@@ -155,14 +139,11 @@ void ST7920_DrawBitmap(const unsigned char* graphic)
 	}
 }
 
-
-// Update the display with the selected graphics
+/* Update the display with the selected graphics */
 void ST7920_Update(void)
 {
 	ST7920_DrawBitmap(image);
 }
-
-
 
 void ST7920_Clear()
 {
@@ -196,48 +177,43 @@ void ST7920_Clear()
 	}
 }
 
-
 void ST7920_Init (void)
 {
 	HAL_GPIO_WritePin(RST_PORT, RST_PIN, GPIO_PIN_RESET);  // RESET=0
 	HAL_Delay(10);   // wait for 10ms
 	HAL_GPIO_WritePin(RST_PORT, RST_PIN, GPIO_PIN_SET);  // RESET=1
 
-	HAL_Delay(50);   //wait for >40 ms
+	HAL_Delay(50);   		//wait for >40 ms
 
 
-	ST7920_SendCmd(0x30);  // 8bit mode
-	delay_us(110);  //  >100us delay
+	ST7920_SendCmd(0x30);  	// 8bit mode
+	delay_us(110);  		//  >100us delay
 
-	ST7920_SendCmd(0x30);  // 8bit mode
-	delay_us(40);  // >37us delay
+	ST7920_SendCmd(0x30);  	// 8bit mode
+	delay_us(40);  			// >37us delay
 
-	ST7920_SendCmd(0x08);  // D=0, C=0, B=0
-	delay_us(110);  // >100us delay
+	ST7920_SendCmd(0x08);  	// D=0, C=0, B=0
+	delay_us(110);  		// >100us delay
 
-	ST7920_SendCmd(0x01);  // clear screen
-	HAL_Delay(12);  // >10 ms delay
+	ST7920_SendCmd(0x01);  	// clear screen
+	HAL_Delay(12);  		// >10 ms delay
 
 
-	ST7920_SendCmd(0x06);  // cursor increment right no shift
-	HAL_Delay(1);  // 1ms delay
+	ST7920_SendCmd(0x06);  	// cursor increment right no shift
+	HAL_Delay(1);  			// 1ms delay
 
-	ST7920_SendCmd(0x0C);  // D=1, C=0, B=0
-    HAL_Delay(1);  // 1ms delay
+	ST7920_SendCmd(0x0C);  	// D=1, C=0, B=0
+    HAL_Delay(1);  			// 1ms delay
 
-	ST7920_SendCmd(0x02);  // return to home
-	HAL_Delay(1);  // 1ms delay
+	ST7920_SendCmd(0x02);  	// return to home
+	HAL_Delay(1);  			// 1ms delay
 
 }
 
-
-
-// set Pixel
-
+/* Set Pixel */
 void SetPixel(uint8_t x, uint8_t y)
 {
-  if (y < numRows && x < numCols)
-  {
+  if (y < numRows && x < numCols){
     uint8_t *p = image + ((y * (numCols/8)) + (x/8));
     *p |= 0x80u >> (x%8);
 
@@ -248,13 +224,10 @@ void SetPixel(uint8_t x, uint8_t y)
     if (endRow <= y)  { endRow = y + 1; }
     if (startCol > x) { startCol = x; }
     if (endCol <= x)  { endCol = x + 1; }
-
-
   }
-
 }
 
-/* draw a line
+/* Draw a line
  * start point (X0, Y0)
  * end point (X1, Y1)
  */
@@ -283,9 +256,6 @@ void DrawLine(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1)
     }
   }
 }
-
-
-
 
 /* Draw rectangle
  * start point (x,y)
@@ -317,9 +287,6 @@ void DrawRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h)
 	DrawLine(x, y, x, y + h);         /* Left line */
 	DrawLine(x + w, y, x + w, y + h); /* Right line */
 }
-
-
-
 
 /* Draw filled rectangle
  * Start point (x,y)
@@ -354,10 +321,7 @@ void DrawFilledRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h)
 	}
 }
 
-
-
-
-/* draw circle
+/* Draw circle
  * centre (x0,y0)
  * radius = radius
  */
@@ -397,9 +361,7 @@ void DrawCircle(uint8_t x0, uint8_t y0, uint8_t radius)
   }
 }
 
-
-// Draw Filled Circle
-
+/* Draw Filled Circle */
 void DrawFilledCircle(int16_t x0, int16_t y0, int16_t r)
 {
 	int16_t f = 1 - r;
@@ -432,9 +394,7 @@ void DrawFilledCircle(int16_t x0, int16_t y0, int16_t r)
     }
 }
 
-
-
-// Draw Traingle with coordimates (x1, y1), (x2, y2), (x3, y3)
+/* Draw Traingle with coordimates (x1, y1), (x2, y2), (x3, y3) */
 void DrawTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t x3, uint16_t y3)
 {
 	/* Draw lines */
@@ -443,9 +403,7 @@ void DrawTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t x
 	DrawLine(x3, y3, x1, y1);
 }
 
-
-
-// Draw Filled Traingle with coordimates (x1, y1), (x2, y2), (x3, y3)
+/* Draw Filled Traingle with coordimates (x1, y1), (x2, y2), (x3, y3) */
 void DrawFilledTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t x3, uint16_t y3)
 {
 	int16_t deltax = 0, deltay = 0, x = 0, y = 0, xinc1 = 0, xinc2 = 0,
@@ -505,4 +463,3 @@ void DrawFilledTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint
 		y += yinc2;
 	}
 }
-

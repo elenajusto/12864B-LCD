@@ -8,7 +8,6 @@
 #ifndef INC_LCD12864B_H_
 #define INC_LCD12864B_H_
 
-
 #include "stdint.h"
 
 extern uint8_t image[(128 * 64)/8];
@@ -22,7 +21,7 @@ void ST7920_SendCmd (uint8_t cmd);
 // send the data to the LCD
 void ST7920_SendData (uint8_t data);
 
-/* send the string to the LCD
+/* Send the string to the LCD
  * 'row' = starting ROW for the string (from 0 to 3)
  * 'col' = starting COL for the string (from 0 to 7)
  */
@@ -51,16 +50,16 @@ void ST7920_Init (void);
 // Set a pixel on the display
 void SetPixel(uint8_t x, uint8_t y);
 
-// draw line from (X0, Y0) to (X1, Y1)
+// Draw line from (X0, Y0) to (X1, Y1)
 void DrawLine(uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1);
 
-// draw rectangle from (X,Y) w- width, h- height
+// Draw rectangle from (X,Y) w- width, h- height
 void DrawRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h);
 
-// draw filled rectangle
+// Draw filled rectangle
 void DrawFilledRectangle(uint16_t x, uint16_t y, uint16_t w, uint16_t h);
 
-// draw circle with centre (X0, Y0) and radius= radius
+// Draw circle with centre (X0, Y0) and radius= radius
 void DrawCircle(uint8_t x0, uint8_t y0, uint8_t radius);
 
 // Draw Filled Circle with centre (X0, Y0) and radius= r
