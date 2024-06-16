@@ -1,4 +1,4 @@
-"./Core/Src/LCD12864B.o"
+"./Core/Src/ST7920LCD.o"
 "./Core/Src/delay.o"
 "./Core/Src/main.o"
 "./Core/Src/stm32g0xx_hal_msp.o"

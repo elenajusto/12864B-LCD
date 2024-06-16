@@ -5,8 +5,8 @@
  *      Author: elena
  */
 
-#ifndef INC_LCD12864B_H_
-#define INC_LCD12864B_H_
+#ifndef INC_ST7920LCD_H_
+#define INC_ST7920LCD_H_
 
 #include "stdint.h"
 
@@ -72,4 +72,4 @@ void DrawTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t x
 // Draw Filled Traingle with coordimates (x1, y1), (x2, y2), (x3, y3)
 void DrawFilledTriangle(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t x3, uint16_t y3);
 
-#endif /* INC_LCD12864B_H_ */
+#endif /* INC_ST7920LCD_H_ */

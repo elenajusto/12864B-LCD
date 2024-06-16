@@ -4,7 +4,7 @@
  *  Created on: Jun 13, 2024
  *      Author: elena
  */
-#include "LCD12864B.h"
+#include "ST7920LCD.h"
 #include "delay.h"
 #include "stm32g0xx.h"
 

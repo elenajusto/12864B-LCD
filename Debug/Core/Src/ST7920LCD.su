@@ -1,0 +1,17 @@
+../Core/Src/ST7920LCD.c:26:6:SendByteSPI	24	static
+../Core/Src/ST7920LCD.c:39:6:ST7920_SendCmd	16	static
+../Core/Src/ST7920LCD.c:51:6:ST7920_SendData	16	static
+../Core/Src/ST7920LCD.c:62:6:ST7920_SendString	24	static
+../Core/Src/ST7920LCD.c:92:6:ST7920_GraphicMode	16	static
+../Core/Src/ST7920LCD.c:113:6:ST7920_DrawBitmap	32	static
+../Core/Src/ST7920LCD.c:143:6:ST7920_Update	8	static
+../Core/Src/ST7920LCD.c:148:6:ST7920_Clear	16	static
+../Core/Src/ST7920LCD.c:180:6:ST7920_Init	8	static
+../Core/Src/ST7920LCD.c:214:6:SetPixel	24	static
+../Core/Src/ST7920LCD.c:234:6:DrawLine	48	static
+../Core/Src/ST7920LCD.c:265:6:DrawRectangle	24	static
+../Core/Src/ST7920LCD.c:296:6:DrawFilledRectangle	32	static
+../Core/Src/ST7920LCD.c:328:6:DrawCircle	48	static
+../Core/Src/ST7920LCD.c:365:6:DrawFilledCircle	48	static
+../Core/Src/ST7920LCD.c:398:6:DrawTriangle	24	static
+../Core/Src/ST7920LCD.c:407:6:DrawFilledTriangle	64	static

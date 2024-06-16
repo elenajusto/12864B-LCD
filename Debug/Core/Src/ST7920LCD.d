@@ -1,4 +1,4 @@
-Core/Src/LCD12864B.o: ../Core/Src/LCD12864B.c ../Core/Inc/LCD12864B.h \
+Core/Src/ST7920LCD.o: ../Core/Src/ST7920LCD.c ../Core/Inc/ST7920LCD.h \
  ../Core/Inc/delay.h \
  ../Drivers/CMSIS/Device/ST/STM32G0xx/Include/stm32g0xx.h \
  ../Drivers/CMSIS/Device/ST/STM32G0xx/Include/stm32g071xx.h \
@@ -31,7 +31,7 @@ Core/Src/LCD12864B.o: ../Core/Src/LCD12864B.c ../Core/Inc/LCD12864B.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h
-../Core/Inc/LCD12864B.h:
+../Core/Inc/ST7920LCD.h:
 ../Core/Inc/delay.h:
 ../Drivers/CMSIS/Device/ST/STM32G0xx/Include/stm32g0xx.h:
 ../Drivers/CMSIS/Device/ST/STM32G0xx/Include/stm32g071xx.h:
