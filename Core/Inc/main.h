@@ -59,38 +59,20 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define MCO_Pin GPIO_PIN_0
 #define MCO_GPIO_Port GPIOF
+#define CS_Pin GPIO_PIN_0
+#define CS_GPIO_Port GPIOA
+#define SID_Pin GPIO_PIN_1
+#define SID_GPIO_Port GPIOA
 #define USART2_TX_Pin GPIO_PIN_2
 #define USART2_TX_GPIO_Port GPIOA
 #define USART2_RX_Pin GPIO_PIN_3
 #define USART2_RX_GPIO_Port GPIOA
+#define SCLK_Pin GPIO_PIN_4
+#define SCLK_GPIO_Port GPIOA
 #define LED_GREEN_Pin GPIO_PIN_5
 #define LED_GREEN_GPIO_Port GPIOA
-#define E_Pin GPIO_PIN_6
-#define E_GPIO_Port GPIOA
-#define RW_Pin GPIO_PIN_7
-#define RW_GPIO_Port GPIOA
-#define RS_Pin GPIO_PIN_0
-#define RS_GPIO_Port GPIOB
-#define DB4_Pin GPIO_PIN_14
-#define DB4_GPIO_Port GPIOB
-#define DB5_Pin GPIO_PIN_8
-#define DB5_GPIO_Port GPIOA
-#define DB6_Pin GPIO_PIN_9
-#define DB6_GPIO_Port GPIOA
-#define DB7_Pin GPIO_PIN_7
-#define DB7_GPIO_Port GPIOC
-#define DB0_Pin GPIO_PIN_10
-#define DB0_GPIO_Port GPIOA
-#define TMS_Pin GPIO_PIN_13
-#define TMS_GPIO_Port GPIOA
-#define TCK_Pin GPIO_PIN_14
-#define TCK_GPIO_Port GPIOA
-#define DB1_Pin GPIO_PIN_3
-#define DB1_GPIO_Port GPIOB
-#define DB3_Pin GPIO_PIN_4
-#define DB3_GPIO_Port GPIOB
-#define DB2_Pin GPIO_PIN_5
-#define DB2_GPIO_Port GPIOB
+#define RST_Pin GPIO_PIN_1
+#define RST_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

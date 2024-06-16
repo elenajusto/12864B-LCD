@@ -91,6 +91,20 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
 
+  // Initialize the LCD
+      GDinit();
+
+  // Clear the display
+  GDtClear();
+
+  // Print "Hello" on the first line, starting at column 0
+  uint8_t text1[] = "Hello";
+  GDtWrite(text1, 0, 0);
+
+  // Print "World" on the second line, starting at column 0
+  uint8_t text2[] = "World";
+  GDtWrite(text2, 1, 0);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -210,15 +224,17 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, LED_GREEN_Pin|E_Pin|RW_Pin|DB5_Pin
-                          |DB6_Pin|DB0_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, CS_Pin|SID_Pin|SCLK_Pin|LED_GREEN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, RS_Pin|DB4_Pin|DB1_Pin|DB3_Pin
-                          |DB2_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(RST_GPIO_Port, RST_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(DB7_GPIO_Port, DB7_Pin, GPIO_PIN_RESET);
+  /*Configure GPIO pins : CS_Pin SID_Pin SCLK_Pin */
+  GPIO_InitStruct.Pin = CS_Pin|SID_Pin|SCLK_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : LED_GREEN_Pin */
   GPIO_InitStruct.Pin = LED_GREEN_Pin;
@@ -227,30 +243,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
   HAL_GPIO_Init(LED_GREEN_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : E_Pin RW_Pin DB5_Pin DB6_Pin
-                           DB0_Pin */
-  GPIO_InitStruct.Pin = E_Pin|RW_Pin|DB5_Pin|DB6_Pin
-                          |DB0_Pin;
+  /*Configure GPIO pin : RST_Pin */
+  GPIO_InitStruct.Pin = RST_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : RS_Pin DB4_Pin DB1_Pin DB3_Pin
-                           DB2_Pin */
-  GPIO_InitStruct.Pin = RS_Pin|DB4_Pin|DB1_Pin|DB3_Pin
-                          |DB2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : DB7_Pin */
-  GPIO_InitStruct.Pin = DB7_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(DB7_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(RST_GPIO_Port, &GPIO_InitStruct);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
 /* USER CODE END MX_GPIO_Init_2 */
