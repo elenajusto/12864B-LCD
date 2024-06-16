@@ -1,8 +1,5 @@
 Core/Src/LCD12864B.o: ../Core/Src/LCD12864B.c ../Core/Inc/LCD12864B.h \
- ../Core/Inc/main.h ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
- ../Core/Inc/stm32g0xx_hal_conf.h \
- ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h \
- ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_def.h \
+ ../Core/Inc/delay.h \
  ../Drivers/CMSIS/Device/ST/STM32G0xx/Include/stm32g0xx.h \
  ../Drivers/CMSIS/Device/ST/STM32G0xx/Include/stm32g071xx.h \
  ../Drivers/CMSIS/Include/core_cm0plus.h \
@@ -11,6 +8,10 @@ Core/Src/LCD12864B.o: ../Core/Src/LCD12864B.c ../Core/Inc/LCD12864B.h \
  ../Drivers/CMSIS/Include/cmsis_gcc.h \
  ../Drivers/CMSIS/Include/mpu_armv7.h \
  ../Drivers/CMSIS/Device/ST/STM32G0xx/Include/system_stm32g0xx.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h \
+ ../Core/Inc/stm32g0xx_hal_conf.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_def.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_rcc.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc_ex.h \
@@ -26,15 +27,12 @@ Core/Src/LCD12864B.o: ../Core/Src/LCD12864B.c ../Core/Inc/LCD12864B.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_flash_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim.h \
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h \
  ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h \
- ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h \
- ../Core/Inc/main.h
+ ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h
 ../Core/Inc/LCD12864B.h:
-../Core/Inc/main.h:
-../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
-../Core/Inc/stm32g0xx_hal_conf.h:
-../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h:
-../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_def.h:
+../Core/Inc/delay.h:
 ../Drivers/CMSIS/Device/ST/STM32G0xx/Include/stm32g0xx.h:
 ../Drivers/CMSIS/Device/ST/STM32G0xx/Include/stm32g071xx.h:
 ../Drivers/CMSIS/Include/core_cm0plus.h:
@@ -43,6 +41,10 @@ Core/Src/LCD12864B.o: ../Core/Src/LCD12864B.c ../Core/Inc/LCD12864B.h \
 ../Drivers/CMSIS/Include/cmsis_gcc.h:
 ../Drivers/CMSIS/Include/mpu_armv7.h:
 ../Drivers/CMSIS/Device/ST/STM32G0xx/Include/system_stm32g0xx.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal.h:
+../Core/Inc/stm32g0xx_hal_conf.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_def.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_ll_rcc.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_rcc_ex.h:
@@ -58,6 +60,7 @@ Core/Src/LCD12864B.o: ../Core/Src/LCD12864B.c ../Core/Inc/LCD12864B.h \
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_flash_ex.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_pwr_ex.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim.h:
+../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_tim_ex.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart.h:
 ../Drivers/STM32G0xx_HAL_Driver/Inc/stm32g0xx_hal_uart_ex.h:
-../Core/Inc/main.h:
