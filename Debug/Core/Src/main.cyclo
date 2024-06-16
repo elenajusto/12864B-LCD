@@ -1,6 +1,8 @@
-../Core/Src/main.c:71:5:main	1
-../Core/Src/main.c:132:6:SystemClock_Config	3
-../Core/Src/main.c:173:13:MX_TIM1_Init	4
-../Core/Src/main.c:220:13:MX_USART2_UART_Init	5
-../Core/Src/main.c:268:13:MX_GPIO_Init	1
-../Core/Src/main.c:319:6:Error_Handler	1
+../Core/Src/main.c:96:5:main	1
+../Core/Src/main.c:194:6:SystemClock_Config	3
+../Core/Src/main.c:235:13:MX_TIM1_Init	4
+../Core/Src/main.c:282:13:MX_USART2_UART_Init	5
+../Core/Src/main.c:330:13:MX_GPIO_Init	1
+../Core/Src/main.c:376:6:DrawLeftBitmapsInLoop	3
+../Core/Src/main.c:391:6:DrawRightAnimationsInLoop	3
+../Core/Src/main.c:413:6:Error_Handler	1

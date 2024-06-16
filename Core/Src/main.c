@@ -56,11 +56,36 @@ static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
 static void MX_TIM1_Init(void);
 /* USER CODE BEGIN PFP */
-
+void DrawLeftBitmapsInLoop(void);
+void DrawRightAnimationsInLoop(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+
+int animationDelay = 5; // ms
+
+// Array of pointers to the left animations
+const uint8_t* FrontBitmapArray[] = {
+	Front1degLeft, Front2degLeft, Front3degLeft, Front4degLeft, Front5degLeft,
+	Front6degLeft, Front7degLeft, Front8degLeft, Front9degLeft, Front10degLeft,
+	Front11degLeft, Front12degLeft, Front13degLeft, Front14degLeft, Front15degLeft,
+	Front16degLeft, Front17degLeft, Front18degLeft, Front19degLeft, Front20degLeft,
+	Front21degLeft, Front22degLeft, Front23degLeft, Front24degLeft, Front25degLeft,
+	Front26degLeft, Front27degLeft, Front28degLeft, Front29degLeft, Front30degLeft,
+	Front31degLeft, Front32degLeft, Front33degLeft, Front34degLeft, Front35degLeft
+};
+
+// Array of pointers to the right animations
+const unsigned char* rightAnimations[] = {
+    frontRight1, frontRight2, frontRight3, frontRight4, frontRight5,
+    frontRight6, frontRight7, frontRight8, frontRight9, frontRight10,
+    frontRight11, frontRight12, frontRight13, frontRight14, frontRight15,
+    frontRight16, frontRight17, frontRight18, frontRight19, frontRight20,
+    frontRight21, frontRight22, frontRight23, frontRight24, frontRight25,
+    frontRight26, frontRight27, frontRight28, frontRight29, frontRight30,
+	frontRight31, frontRight32, frontRight33, frontRight34, frontRight35
+};
 
 /* USER CODE END 0 */
 
@@ -101,6 +126,7 @@ int main(void)
 
   ST7920_Init();
 
+  /*
   ST7920_SendString(0,2, "");
   ST7920_SendString(1,0, "Design Challenge");
   ST7920_SendString(2,0, "Vehicle Online");
@@ -108,9 +134,7 @@ int main(void)
 
   HAL_Delay(2000);
   ST7920_Clear();
-
-  ST7920_GraphicMode(1);
-  ST7920_DrawBitmap(BigLogo);
+  */
 
   /* USER CODE END 2 */
 
@@ -118,6 +142,44 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  /*
+	  ST7920_GraphicMode(1);
+	  ST7920_DrawBitmap(BigLogo);
+
+	  HAL_Delay(2000);
+	  ST7920_Clear();
+
+	  ST7920_GraphicMode(1);
+	  ST7920_DrawBitmap(utsText);
+
+	  HAL_Delay(2000);
+	  ST7920_Clear();
+
+	  ST7920_GraphicMode(1);
+	  ST7920_DrawBitmap(techFest);
+
+	  HAL_Delay(2000);
+	  ST7920_Clear();
+
+	  ST7920_GraphicMode(1);
+	  ST7920_DrawBitmap(car3);
+
+	  HAL_Delay(2000);
+	  ST7920_Clear();
+
+	  ST7920_GraphicMode(0);
+	  ST7920_SendString(0,0, "Speed: XXX");
+	  ST7920_SendString(1,0, "Accel: XXX");
+	  ST7920_SendString(2,0, "Steer: R/L/F");
+	  ST7920_SendString(3,0, " Auto: ON/OFF");
+
+	  HAL_Delay(2000);
+	  ST7920_Clear();
+	  */
+
+	  DrawLeftBitmapsInLoop();
+	  DrawRightAnimationsInLoop();
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -309,6 +371,38 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+// Function to loop through the bitmaps
+void DrawLeftBitmapsInLoop(void) {
+    int i;
+    ST7920_GraphicMode(1);
+
+    // Loop to count up from 1 to 35
+    for (i = 0; i < 35; i++) {
+        ST7920_DrawBitmap(FrontBitmapArray[i]);
+    }
+
+    // Loop to count down from 35 to 1
+    for (i = 34; i >= 0; i--) {
+        ST7920_DrawBitmap(FrontBitmapArray[i]);
+    }
+}
+
+void DrawRightAnimationsInLoop(void) {
+    int i;
+    ST7920_GraphicMode(1);
+
+    // Loop to count up from 1 to 35
+    for (i = 0; i < 35; i++) {
+        ST7920_DrawBitmap(rightAnimations[i]);
+    }
+
+    // Loop to count down from 35 to 0
+    for (i = 34; i >= 0; i--) {
+        ST7920_DrawBitmap(rightAnimations[i]);
+    }
+}
+
 
 /* USER CODE END 4 */
 
